@@ -1,0 +1,22 @@
+{
+  "name": "parcelify-loader",
+  "version": "0.1.0",
+  "author": "Gerfried Aigner @g-aigner",
+  "description": "parcelify-like loader module for webpack",
+  "files": [
+    "index.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/g-aigner/parcelify-loader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/g-aigner/parcelify-loader/issues"
+  },
+  "homepage": "https://github.com/g-aigner/parcelify-loader",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "loader-utils": "^0.2.16"
+  }
+}
