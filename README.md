@@ -1,6 +1,6 @@
 # parcelify-loader
 
-A simple [webpack](https://github.com/webpack/webpack) loader that mimicks
+A simple [webpack](https://github.com/webpack/webpack) loader that mimics
 the function of [parcelify](https://github.com/rotundasoftware/parcelify).
 
 ## tl;dr
