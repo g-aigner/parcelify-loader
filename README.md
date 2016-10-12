@@ -42,7 +42,7 @@ module: {
     preLoaders: [
         {
             test: /\.js$/,
-            loader: path.join(__dirname, "parcelify-loader"),
+            loader: "parcelify-loader",
             include: [
                 path.resolve("./src"),
                 path.resolve("./node_modules/your-browserify-components") // e.g.

@@ -1,6 +1,6 @@
 {
   "name": "parcelify-loader",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Gerfried Aigner @g-aigner",
   "description": "parcelify-like loader module for webpack",
   "files": [
