@@ -21,15 +21,24 @@ module.exports = function(content) {
     config.require = config.require || defaults.require
     config.lineBreakSeq = config.lineBreakSeq || defaults.lineBreakSeq
 
-    // check if there is a `package.json` and read its content
-    var packageJson = path.resolve(this.context, config.json)
-    var packageJsonContent
-    try {
-        packageJsonContent = fs.readFileSync(packageJson, config.encoding)
-    } catch (readFileSyncError) {
+    // check recursively if there is a `package.json` in the module path or it's ancestors
+    var packageJsonDir = this.context;
+    var packageJsonContent;
+    while(!packageJsonContent) {
+        var packageJson = path.resolve(packageJsonDir, config.json)
+        try {
+            packageJsonContent = fs.readFileSync(packageJson, config.encoding)
+        } catch (readFileSyncError) {
+            var parent = path.resolve(packageJsonDir, '..');
+            if(parent === packageJsonDir) break; //we have reached the root path
+            else packageJsonDir = parent;
+            continue;
+        }
+    }
+
+    if(!packageJsonContent)
         // cannot read `package.json`, return
         return content
-    }
 
     // parse JSON
     try {
@@ -41,7 +50,7 @@ module.exports = function(content) {
     
     // if there is a "style" property, ensure it is a file
     if (packageJsonContent.style === undefined) return content
-    var styleFile = path.resolve(this.context, packageJsonContent.style)
+    var styleFile = path.resolve(packageJsonDir, packageJsonContent.style)
     try {
         fs.accessSync(styleFile)
     } catch (accessSyncError) {

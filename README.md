@@ -34,8 +34,8 @@ it [here](https://webpack.github.io/docs/stylesheets.html).
 
 ### parcelify-loader
 
-Apply `parcelify-loader` to the desired filetypes (preferably as a preloader, 
-so it runs before all other transformations):
+Apply `parcelify-loader` to the desired filetypes (preferably as a postloader, 
+so it runs after all other transformations):
 
 ```javascript
 module: {
