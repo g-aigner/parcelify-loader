@@ -66,8 +66,8 @@ module.exports = function(content) {
     // file, the original file is NEVER altered
     var require = config.require
     require = require.replace("$1", JSON.stringify(styleFile))
-    require += config.lineBreakSeq
-    content = require + content
+    content += config.lineBreakSeq
+    content = content + require
 
     return content
 }
