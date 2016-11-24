@@ -21,8 +21,8 @@ syntax, so it does not read bundling information from a package file.
 ## How does this work?
 
 The loader reads from `package.json`, parses the `style` attribute and adds a 
-virtual `require()` for the stylesheet to the in-mem version of the loaded 
-javascript file.
+virtual `require()` for each stylesheet specified to the in-mem version of the
+loaded javascript file.
 
 ## Configuration
 
@@ -93,5 +93,13 @@ you will not need anything but the linebreak. Default:
 ```javascript
 parcelifyLoader: {
     lineBreakSeq: "\n"
+}
+```
+* `styles` - explicitly expose CSSs from modules in the case there is no "style"
+field specified on it's package.json. Keys are module names and values can be 
+string specifying a file or array of files.  Default:
+```javascript
+parcelifyLoader: {
+    styles: {}
 }
 ```
