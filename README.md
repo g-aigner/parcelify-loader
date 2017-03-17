@@ -105,3 +105,7 @@ options: {
   lineBreakSeq: "\n"
 }
 ```
+
+## Support for webpack 1
+
+[Version 1.0.0](https://github.com/g-aigner/parcelify-loader/releases/tag/1.0.0) of `parcelify-loader` supports webpack 1.14.0.
