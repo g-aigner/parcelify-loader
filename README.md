@@ -8,7 +8,7 @@ the function of [parcelify](https://github.com/rotundasoftware/parcelify).
 ```
 $ npm install --save-dev parcelify-loader
 ```
-[Documentation: using loaders](http://webpack.github.io/docs/using-loaders.html)
+[Documentation: using loaders](https://webpack.js.org/concepts/loaders/)
 
 ## Why is this necessary?
 
@@ -30,25 +30,26 @@ You will need to configure `parcelify-loader` for the javascript source files
 in your `webpack.config.js`.
 
 **Note**: you will also need an appropriate stylesheet loader, read more about 
-it [here](https://webpack.github.io/docs/stylesheets.html).
+it [here](https://webpack.js.org/loaders/css-loader/).
 
 ### parcelify-loader
 
-Apply `parcelify-loader` to the desired filetypes (preferably as a preloader, 
-so it runs before all other transformations):
+Apply `parcelify-loader` to the desired filetypes (enforcing `pre` to run before
+all other transformations):
 
 ```javascript
 module: {
-    preLoaders: [
-        {
-            test: /\.js$/,
-            loader: "parcelify-loader",
-            include: [
-                path.resolve("./src"),
-                path.resolve("./node_modules/your-browserify-components") // e.g.
-            ]
-        }
-    ]
+  rules: [
+    {
+      test: /\.js$/,
+      enforce: "pre",
+      use: [ "parcelify-loader" ],
+      include: [
+        path.resolve("./src"),
+        path.resolve("./node_modules/your-browserify-components") // e.g.
+      ]
+    }
+  ]
 }       
 ```
 Make sure you include your compoment's source directory in `include`; otherwise, 
@@ -57,9 +58,18 @@ native styles for components will not be included.
 (*Optional*) Configure `parcelify-loader` with project specific settings:
 
 ```javascript
-// after module {} section in your `webpack.config.js`
-parcelifyLoader: {
-    json: "component.json"
+module: {
+  rules: [
+    {
+      ...
+      use: [
+        loader: "parcelify-loader",
+        options: {
+          json: "component.json"
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -69,29 +79,29 @@ The following settings can be configured for `parcelify-loader`:
 
 * `json` - the filename of your component's json file. Default:
 ```javascript
-parcelifyLoader: {
-    json: "package.json"
+options: {
+  json: "package.json"
 }
 ``` 
 * `encoding` - the encoding of your component's json file. See 
 [list of encodings](https://github.com/nodejs/node/blob/master/lib/buffer.js) 
 for supported encodings. Default:
 ```javascript
-parcelifyLoader: {
-    encoding: "utf8"
+options: {
+  encoding: "utf8"
 }
 ``` 
 * `require` - the statement to wrap the required style file in. Note that 
 this setting **must** have a `$1` parameter to work. Default:
 ```javascript
-parcelifyLoader: {
-    require: "require($1)"
+options: {
+  require: "require($1)"
 }
 ```
 * `lineBreakSeq` - the character sequence to render after `require`. Typically,
 you will not need anything but the linebreak. Default:
 ```javascript
-parcelifyLoader: {
-    lineBreakSeq: "\n"
+options: {
+  lineBreakSeq: "\n"
 }
 ```
