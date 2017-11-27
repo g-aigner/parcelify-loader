@@ -58,7 +58,7 @@ module.exports = function(source, map) {
         fs.access(styleFile, (err) => {
             if (err) {
                 // cannot find given style file
-                console.log("Cannot find " + styleFile + ": " + accessSyncError)
+                console.log("Cannot find " + styleFile + ": " + err)
                 callback(null, source, map)
                 return
             }
